@@ -2,6 +2,14 @@ using System.Diagnostics;
 
 namespace nvrlift.AssettoServer.HostExtension;
 
+public static IHostBuilder CreateHostBuilder(string[] args) =>
+    Host.CreateDefaultBuilder(args)
+        .UseSystemd()
+        .ConfigureServices((hostContext, services) =>
+        {
+            services.AddHostedService<Worker>();
+        });
+
 public class RestartWatcher
 {
     private readonly string _basePath;
